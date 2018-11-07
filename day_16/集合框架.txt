@@ -1,0 +1,92 @@
+集合的由来：
+	对象用于封装特有数据，对象多了就需要存储，如果对象的个数不确定，
+	就需要用集合容器进行存储。
+
+集合特点：
+	1，用于存储对象
+	2，集合的长度是可变的
+	3，集合中不可以存储基本数据类型值
+	
+	
+	
+集合容器因为内部数据结构不同，有多种具体容器，不断向上抽取就形成了集合框架。
+
+框架顶层的Collection接口：
+
+Collection常见方法：
+1，添加
+	boolean add(Object obj)
+	boolean addAll(Collection<? Object>c)
+	
+2，删除
+	boolean remove(Object obj)
+	boolean removeAll(Collection<? Object>c)
+	void clear()
+
+3，判断
+	boolean contains(Object obj)
+	boolean containsAll(Collection<? Object>c)
+	boolean isEmpty()
+
+4，获取
+	int size()
+	terator  iterator():取出元素
+
+5，其他
+	boolean retainAll(Collection coll):取交集
+	Object[] toArray():将集合转化成数组
+
+------------------------------------------
+Collection
+	|--1,List:有序,存入和取出的元素一致。元素都有索引(角标)。元素可重复。
+
+	|--2,Set:元素不能重复,无序。
+
+------------------------------------------
+
+List:特有的常见方法:有一个共性特点就是操作角标。
+1，添加
+	void add(int index,class ele)
+	void addAll(int index,List list)
+
+2，删除
+	Object remove(int index)
+
+
+
+3，修改
+	Object set(int index,ele)
+
+
+4，获取
+	Object get(index)
+
+
+---------------------------------------
+List:
+
+	|--Vector:内部是数组数据结构，是同步的。增删查询都很慢。
+	|--LinkedList:内部是数据链表结构，不是同步的。增删很快。
+	|--ArrayList:内部是数组数据结构，不同步的。替代了Vector。查询的速度快。
+	
+	
+---------------------------------------
+Set:元素不可以重复是无序的。
+	Set的方法和Collection中的一致。
+	|--HashSet:内部的数据结构是哈希表，是不同步的。
+	|--TreeSet:TreeSet集合能对集合中的元素进行排序，是不同步的。判断元素的唯一性
+		就是比较方法返回结果是否为0，是就返回0，就是相同元素。
+		
+		如果不要按照对象中的子安顺序进行排序。如果对象中不具备自然顺序。
+		可以使用TreeSet的第二类排序方式：让集合自身具备比较功能。
+		即定义一个类，实现Comparator接口，覆盖compare方法。
+		
+	
+哈希表确定两个元素是否相同：
+	1，判断两个元素的哈希值是否相同。
+		如果相同，再判断两个对象的内容是否相同。
+	2，判断哈希值相同，其实是判断对象的HashCode方法。	
+		判断内容相同，用的是equals方法。
+	注意：如果哈希值不同，是不需要判断equals方法的。
+	
+	

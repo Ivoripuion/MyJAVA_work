@@ -1,0 +1,106 @@
+========================================================================================
+泛型：
+	jdk1.5出现的安全新特性。
+	
+好处：
+	1，将运行时期的问题转到了编译时期。
+	2，避免了强制转换的麻烦。
+
+<>:什么时候用呢？当操作引用的数据类型不确定时，就使用<>。将要操作的引用数据类型传入即可。
+
+在程序中只要用到了带有<>的类或者接口就要明确要传入的具体引用数据类型。
+
+泛型技术是给编译器提供的技术，用于编译时期。确保类型的安全。
+
+运行时会将泛型去掉，生成的class文件是不带泛型的，这个称为泛型的擦除。
+为什么擦出呢，为了兼容运行时的类加载器。
+泛型的补偿：运行时，通过获取元素的类型进行转换动作。不用使用者再强制转换了。
+
+泛型的通配符:?未知类型
+
+
+========================================================================================
+
+集合的一些技巧：
+
+需要唯一吗？
+需要：Set
+	需要指定顺序吗？
+	需要：TreeSet(要有比较器)
+	不需要：HashSet
+	但是想要一个和存储一样的顺序（有序）：LinkedHashSet
+不需要：List
+	需要频繁增删吗？
+	需要：LinkedList
+	不需要：ArrayList
+	
+通常这些容器都是不同步的。
+
+
+========================================================================================
+
+Map集合：
+
+Map集合一次添加一对元素。Collection一次添加一个元素。
+
+Map:双列集合
+Collection:单列集合
+
+其实Map集合中存储的就是键值对，并且一个集合中只能保证键的唯一性。
+
+常用方法：
+添加：
+	value put(key,value):返回前一个和key关联的值，没有则返回null
+	
+删除：
+	void clear():清空map集合
+	value remove(key):根据指定的key翻出这个键对值
+	
+判断：
+	boolean containsKey(key);
+	boolean containsValue(value);
+	boolean isEmpty();
+	
+获取：
+	value get(key):通过键拿值，若不包含映射关系，返回null
+		当然可以通过返回值判断是否包含键
+	int size():获取键对的个数
+	
+Map常用的子类：
+	|--Hashtable:内部结构就是哈希表，是同步的。不允许null作为键值。
+		|--Properties:用来存储键值对型的配置文件的信息，可以和IO进行结合。
+	|--HashMap:内部结构是哈希表，不是同步的。允许null作为键值。
+	|--TreeMap:内部是二叉树，不同步的。可以对Map集合中的键进行排序。
+
+
+给非同步的集合加锁：
+
+
+class MyCollections{
+	public List synList(List list){
+		return new MyList(list);
+	}
+	
+	private class myList implements List{
+	private List list;
+	private static final Object lock=new Object();
+	
+	MyList(List list){
+		this.list=list;
+	}
+	
+	public boolean add(Object obj){
+		synchronized(lock){
+			return list.add(obj);
+		}
+	}
+	
+	public boolean remove(Object obj){
+		synchronized(lock){
+			return list.remove(obj);
+		}		
+	}
+	
+}
+	
+}

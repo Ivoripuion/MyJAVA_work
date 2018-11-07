@@ -1,0 +1,21 @@
+class 
+{
+	public static void main(String[] args)
+	{
+		
+	}
+}
+class Student
+{
+	static void study()
+	{
+		
+	}~
+}
+class Worker
+{
+	static void work()
+	{
+		
+	}
+}
